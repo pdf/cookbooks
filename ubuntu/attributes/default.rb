@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: ubuntu
-# Recipe:: default
+# Attributes:: default
 #
-# Copyright 2008-2009, Opscode, Inc.
+# Copyright 2010, Ash Berlin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,13 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe "apt"
-
-template "/etc/apt/sources.list" do
-  mode 0644
-  variables :code_name => node[:lsb][:codename],
-            :mirror => node[:ubuntu][:apt_mirror],
-            :secturiy_mirror => node[:ubuntu][:apt_security_mirror]
-  notifies :run, resources(:execute => "apt-get update"), :immediately
-  source "sources.list.erb"
-end
+default[:ubuntu][:apt_mirror] = "http://us.archive.ubuntu.com/ubuntu"
+default[:ubuntu][:apt_security_mirror] = "http://security.ubuntu.com/ubuntu"
