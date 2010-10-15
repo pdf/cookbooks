@@ -23,7 +23,7 @@ template "/etc/apt/sources.list" do
   mode 0644
   variables :code_name => node[:lsb][:codename],
             :mirror => node[:ubuntu][:apt_mirror],
-            :secturiy_mirror => node[:ubuntu][:apt_security_mirror]
+            :security_mirror => node[:ubuntu][:apt_security_mirror]
   notifies :run, resources(:execute => "apt-get update"), :immediately
   source "sources.list.erb"
 end
